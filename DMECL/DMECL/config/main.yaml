@@ -1,0 +1,50 @@
+seed: 42
+data:
+  raw_dir: data/raw/PDDCA
+  processed_dir: data/processed/PDDCA
+  split_file: data/processed/PDDCA/splits.json
+  spacing_xyz: [0.76, 0.76, 1.25]
+  hu_window: [-300.0, 300.0]
+  image_size: 256
+  num_classes: 10
+  label_names:
+    - background
+    - mandible
+    - brainstem
+    - parotid_left
+    - parotid_right
+    - submandibular_left
+    - submandibular_right
+    - optic_nerve_left
+    - optic_nerve_right
+    - chiasm
+model:
+  projection_dim: 64
+train:
+  epochs: 100
+  finetune_epochs: 50
+  batch_size: 8
+  iterations_per_epoch: 8
+  learning_rate: 0.001
+  finetune_learning_rate: 0.0001
+  weight_decay: 0.00001
+  ema_decay: 0.99
+  num_workers: 0
+  amp: true
+  checkpoint_dir: checkpoints
+loss:
+  alpha: 0.1
+  beta: 1.0
+  gamma: 0.01
+  patch_size: 16
+  samples_per_patch: 4
+  max_anchors: 128
+  bank_size: 512
+  max_negatives: 128
+  foreground_low: 0.3
+  foreground_high: 0.7
+  base_margin: 0.2
+  omega: 64.0
+  concentration: 1.0
+  temperature: 0.1
+  alignment_weight: 0.1
